@@ -2,10 +2,8 @@ package com.simbirsoft.fun_forms.service;
 
 import com.simbirsoft.fun_forms.model.response.EmojiResponse;
 import com.simbirsoft.fun_forms.model.response.TranslatorResponse;
-import com.simbirsoft.fun_forms.properties.TranslatorProperties;
+import com.simbirsoft.fun_forms.configuration.properties.TranslatorProperties;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,8 +13,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 @Service

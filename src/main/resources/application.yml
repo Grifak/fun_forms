@@ -33,3 +33,9 @@ s3:
 presigned:
   url:
     ttl: 86400000
+
+translator:
+  emojiTranslatorUrl: https://api.emojitranslate.com/
+  cloudToken: Api-key AQVN3PdNN1K2ZGomYOu2sTvAt_UmCwKOKnceIFQt
+  cloudFolderId: b1gaovchlj8dgi1eh7ou
+  yandexTranslatorUrl: https://translate.api.cloud.yandex.net/translate/v2/translate

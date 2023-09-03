@@ -1,4 +1,4 @@
-package com.simbirsoft.fun_forms.properties;
+package com.simbirsoft.fun_forms.configuration.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
