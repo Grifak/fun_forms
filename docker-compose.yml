@@ -1,0 +1,21 @@
+version: '3'
+services:
+  youtube-reverse-service:
+    image: youtube-reverse-service
+    volumes:
+      - 'C:\Users\Raze\PycharmProjects\YoutubeReverse\app:/app'
+    ports:
+      - '5000:5000'
+  java_service:
+    build:
+      context: .
+      dockerfile: ./dockerfile
+    ports:
+      - '8080:8080'
+  postgresql:
+    image: postgres:14.6-alpine
+    restart: always
+    ports:
+      - '5432'
+    env_file:
+      - .env

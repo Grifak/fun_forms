@@ -1,0 +1,35 @@
+client:
+  youtube-reverse-service:
+    name: ${CLIENT_YOUTUBE_REVERSE_SERVICE_NAME:youtube-reverse-client}
+    url: ${CLIENT_YOUTUBE_REVERSE_SERVICE_URL:http://127.0.0.1:5000/}
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fun-forms
+    username: postgres
+    password: root
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.web.servlet.DispatcherServlet: info
+    org.springframework: info
+    org.hibernate: info
+
+s3:
+  accessKey: ${S3_ACCESS_KEY}
+  secretKey: ${S3_SECRET_KEY}
+  bucket: songs
+  region: ru-central1
+  endpoint: storage.yandexcloud.net
+
+presigned:
+  url:
+    ttl: 86400000
