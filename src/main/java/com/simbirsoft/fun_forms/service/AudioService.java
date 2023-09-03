@@ -55,6 +55,10 @@ public class AudioService {
                 s3Service.getPresignedUrl(reversedSongPart.getUrl()));
     }
 
+    public Boolean isTitleLikeIgnoreCase(Long songId, String guess) {
+        return songRepository.findByIdAndTitleContainingIgnoreCase(songId, guess).isPresent();
+    }
+
     public record PresignedReversedSongPart(Integer index, URL url) {
     }
 }

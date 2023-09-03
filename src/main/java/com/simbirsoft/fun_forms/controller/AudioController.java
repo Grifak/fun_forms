@@ -1,8 +1,10 @@
 package com.simbirsoft.fun_forms.controller;
 
 import com.simbirsoft.fun_forms.model.request.GetReversedAudioRequest;
+import com.simbirsoft.fun_forms.model.request.GuessTheSongRequest;
 import com.simbirsoft.fun_forms.model.request.ReverseAudioRequest;
 import com.simbirsoft.fun_forms.model.response.GetReversedAudioResponse;
+import com.simbirsoft.fun_forms.model.response.GuessTheSongResponse;
 import com.simbirsoft.fun_forms.model.response.ReverseAudioResponse;
 import com.simbirsoft.fun_forms.service.AudioService;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +37,13 @@ public class AudioController {
                 audioService.getPresignedReversedSongPart(request.songId(), request.index());
         return new GetReversedAudioResponse(
                 request.songId(), request.index(), songPart.url());
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping(value = "/guess",produces = MediaType.APPLICATION_JSON_VALUE)
+    GuessTheSongResponse guessTheSong(@RequestBody GuessTheSongRequest request) {
+        return new GuessTheSongResponse(request.songId(),
+                audioService.isTitleLikeIgnoreCase(request.songId(), request.guess()));
     }
 
 }
