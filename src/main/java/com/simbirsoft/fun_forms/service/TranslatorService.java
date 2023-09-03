@@ -9,11 +9,19 @@ public class TranslatorService {
     private final RestClientCaller restClientCaller;
 
     public String textToSmile(String text) {
-        return restClientCaller.translateToEmoji(text);
+        String englishText = restClientCaller.yandexTranslate(text, "en");
+        String response = restClientCaller.engToEmoji(englishText);
+        int spaceIndex = response.indexOf(" ");
+
+        return response.substring(0, spaceIndex);
     }
 
     public String songToSmile(String songName) {
-        return restClientCaller.translateToEmoji(songName);
+        String englishText = restClientCaller.yandexTranslate(songName, "en");
+        String response = restClientCaller.engToEmoji(englishText);
+        int spaceIndex = response.indexOf(" ");
+
+        return response.substring(0, spaceIndex);
     }
 
     public String doubleTranslate(String text){

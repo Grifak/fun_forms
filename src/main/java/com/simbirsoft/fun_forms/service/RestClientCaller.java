@@ -1,8 +1,11 @@
 package com.simbirsoft.fun_forms.service;
 
+import com.simbirsoft.fun_forms.model.response.EmojiResponse;
 import com.simbirsoft.fun_forms.model.response.TranslatorResponse;
 import com.simbirsoft.fun_forms.properties.TranslatorProperties;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,21 +26,26 @@ public class RestClientCaller {
     private final RestTemplate restTemplate;
     private final TranslatorProperties translatorProperties;
 
-    public String translateToEmoji(String text){
-        MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
-        requestBody.add("f", "ru");
-        requestBody.add("t", "emoji");
-        requestBody.add("o", " ft00-");
-        requestBody.add("d", text);
-        requestBody.add("k", "giwlmvwwxpp");
+    public String engToEmoji(String text){
+        Map<String, String> requestBody = Map.of(
+                "dropdown1", "English",
+                "dropdown2", "✌🏻",
+                "input1", text,
+                "id","5kbXS1vMbHaaoIuKCg8983",
+                "locale", "en-US");
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
 
-        ResponseEntity<String> response = restTemplate.exchange(URI.create(translatorProperties.getEmojiTranslatorUrl()), HttpMethod.POST, requestEntity, String.class);
+        ResponseEntity<EmojiResponse> response = restTemplate.exchange(
+                URI.create(translatorProperties.getEmojiTranslatorUrl()),
+                HttpMethod.POST,
+                requestEntity,
+                EmojiResponse.class
+                );
 
-        return response.getBody();
+        return response.getBody().getResults().get(0);
     }
 
     public String yandexTranslate(String text, String targetLanguageCode){
