@@ -1,7 +1,7 @@
 package com.simbirsoft.fun_forms.controller;
 
+import com.simbirsoft.fun_forms.service.TranslatorService;
 import lombok.AllArgsConstructor;
-import com.simbirsoft.fun_forms.service.SmileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,23 +12,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @Slf4j
-@RequestMapping("/smile")
-public class SmileController {
-    private final SmileService smileService;
+@RequestMapping("/translator")
+public class TranslatorController {
+    private final TranslatorService translatorService;
 
-    @PostMapping("/text")
+    @PostMapping("/text-smile")
     public ResponseEntity<String> textToSmile(@RequestParam String text){
         log.info("SMILE_TEXT >> text = {}", text);
-        String response = smileService.textToSmile(text);
+        String response = translatorService.textToSmile(text);
 
         return ResponseEntity.ok()
                 .body(response);
     }
 
-    @PostMapping("/song")
+    @PostMapping("/song-smile")
     public ResponseEntity<String> songToSmile(@RequestParam String songName){
         log.info("SMILE_SONG >> songName = {}", songName);
-        String response = smileService.songToSmile(songName);
+        String response = translatorService.songToSmile(songName);
+
+        return ResponseEntity.ok()
+                .body(response);
+    }
+
+    @PostMapping("/double-translate")
+    public ResponseEntity<String> doubleTranslate(@RequestParam String text){
+        log.info("DOUBLE_TRANSLATE >> text = {}", text);
+        String response = translatorService.doubleTranslate(text);
 
         return ResponseEntity.ok()
                 .body(response);
