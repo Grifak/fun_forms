@@ -13,7 +13,9 @@ public class TranslatorService {
         String englishText = restClientCaller.yandexTranslate(text, "en");
         String response = restClientCaller.engToEmoji(englishText);
         int spaceIndex = response.indexOf(" ");
-        response = response.substring(0, spaceIndex);
+        if(spaceIndex > 0) {
+            response = response.substring(0, spaceIndex);
+        }
 
         return new QuestionAnswer(response, text);
     }
@@ -22,7 +24,9 @@ public class TranslatorService {
         String englishText = restClientCaller.yandexTranslate(songName, "en");
         String response = restClientCaller.engToEmoji(englishText);
         int spaceIndex = response.indexOf(" ");
-        response = response.substring(0, spaceIndex);
+        if(spaceIndex > 0) {
+            response = response.substring(0, spaceIndex);
+        }
 
         return new QuestionAnswer(response, songName);
     }
