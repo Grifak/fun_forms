@@ -1,6 +1,7 @@
 package com.simbirsoft.fun_forms.service;
 
 import lombok.AllArgsConstructor;
+import com.simbirsoft.fun_forms.model.response.QuestionAnswer;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -8,25 +9,29 @@ import org.springframework.stereotype.Service;
 public class TranslatorService {
     private final RestClientCaller restClientCaller;
 
-    public String textToSmile(String text) {
+    public QuestionAnswer textToSmile(String text) {
         String englishText = restClientCaller.yandexTranslate(text, "en");
         String response = restClientCaller.engToEmoji(englishText);
         int spaceIndex = response.indexOf(" ");
+        response = response.substring(0, spaceIndex);
 
-        return response.substring(0, spaceIndex);
+        return new QuestionAnswer(response, text);
     }
 
-    public String songToSmile(String songName) {
+    public QuestionAnswer songToSmile(String songName) {
         String englishText = restClientCaller.yandexTranslate(songName, "en");
         String response = restClientCaller.engToEmoji(englishText);
         int spaceIndex = response.indexOf(" ");
+        response = response.substring(0, spaceIndex);
 
-        return response.substring(0, spaceIndex);
+        return new QuestionAnswer(response, songName);
     }
 
-    public String doubleTranslate(String text){
+    public QuestionAnswer doubleTranslate(String text){
         String koreanText = restClientCaller.yandexTranslate(text, "ko");
         String italianText = restClientCaller.yandexTranslate(koreanText, "it");
-        return restClientCaller.yandexTranslate(italianText, "ru");
+        String response = restClientCaller.yandexTranslate(italianText, "ru");
+
+        return new QuestionAnswer(response, text);
     }
 }
