@@ -36,10 +36,10 @@ public interface SongMapper {
                                                       List<YoutubeReverseClient.ReversedSongPartDto> reversedSongPartDtos) {
         List<ReversedSongPart> reversedSongParts = new ArrayList<>();
 
-        // Convert DTOs to model objects and add them to the list
         for (YoutubeReverseClient.ReversedSongPartDto dto : reversedSongPartDtos) {
             ReversedSongPart reversedSongPart = new ReversedSongPart();
             reversedSongPart.setSong(song);
+            reversedSongPart.setIndex(dto.index());
             reversedSongPart.setUrl(dto.url());
             reversedSongParts.add(reversedSongPart);
         }
